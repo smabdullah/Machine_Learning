@@ -9,6 +9,7 @@ import pandas as pd
 dataset = pd.read_csv('Ads_CTR_Optimisation.csv')
 
 # Implementing UCB
+###########
 import math
 N = 10000
 d = 10
@@ -20,11 +21,11 @@ for n in range(0, N):
     ad = 0
     max_upper_bound = 0
     for i in range(0, d):
-        if (numbers_of_selections[i] > 0):
+        try:
             average_reward = sums_of_rewards[i] / numbers_of_selections[i]
             delta_i = math.sqrt(3/2 * math.log(n + 1) / numbers_of_selections[i])
             upper_bound = average_reward + delta_i
-        else:
+        except:
             upper_bound = 1e400
         if upper_bound > max_upper_bound:
             max_upper_bound = upper_bound
